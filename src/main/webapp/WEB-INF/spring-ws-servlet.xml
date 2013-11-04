@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sws="http://www.springframework.org/schema/web-services"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="org.drexel.ws.message,org.drexel.ws.services, org.drexel.ws.model"/>
+
+    <sws:annotation-driven/>
+
+    <sws:dynamic-wsdl id="PublicationService"
+                      portTypeName="PubPort"
+                      locationUri="/PublicationService/"
+                      targetNamespace="http://com.drexel.ws.messages">
+        <sws:xsd location="WEB-INF/classes/org/drexel/ws/message/PublicationMessages.xsd"/>
+    </sws:dynamic-wsdl>
+
+    <bean id="jsonDBResource" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg index="0" value="org/drexel/ws/model/pubs.json"/>
+    </bean>
+</beans>
